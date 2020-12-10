@@ -24,7 +24,7 @@ public class Main {
         config.init();
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.submit(new ServerService(config.getAddress()));
-        exec.submit(new ClientService());
+        exec.submit(new ClientService(config.getAddress()));
         exec.shutdown();
     }
 }

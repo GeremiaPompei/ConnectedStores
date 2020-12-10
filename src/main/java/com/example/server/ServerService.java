@@ -23,9 +23,9 @@ public class ServerService implements Runnable {
         final HttpServer server;
         try {
             server = this.startServer();
-            System.out.println("Jersey app started.\nHit enter to stop it..."+this.senderAddress);
+            System.out.println("Server started: "+this.senderAddress);
             System.in.read();
-            server.stop();
+            //server.stop();
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -12,12 +12,18 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
 import com.example.model.*;
+import com.example.view.*;
 import java.util.ArrayList;
 /**
  *
  * @author geremiapompei
  */
 public class ClientService implements Runnable {
+    private String senderAddress;
+    
+    public ClientService(String address) {
+        this.senderAddress = address;
+    }
     
     private RestResponse postRequest(Message message){
         Client c = ClientBuilder.newClient();
@@ -27,9 +33,8 @@ public class ClientService implements Runnable {
     }
     
     public void run() {
-        Message mex = new Message("http://192.168.1.67:8080/"
-                    ,"http://192.168.1.223:8080/","tell","func",new ArrayList());
-        RestResponse res = this.postRequest(mex);
-        System.out.println(res.getResponse());
+        ClientView view = 
+                new ClientView((mex)->this.postRequest(mex),this.senderAddress);
+        view.start();
     }
 }
