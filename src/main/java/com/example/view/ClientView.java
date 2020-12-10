@@ -14,7 +14,6 @@ import com.example.model.*;
  * @author geremiapompei
  */
 public class ClientView {
-    private Scanner scanner = new Scanner(System.in);
     private String address;
     private Function<Message, RestResponse> postRequest;
     
@@ -24,41 +23,32 @@ public class ClientView {
     }
     
     public void start() {
-        String input = "";
-        while(input!="exit") {
+        Scanner scanner = new Scanner(System.in);
+        while(true) {
             System.out.println("Opzioni: [ask, tell]");
-            input = scanner.nextLine();
-            switch(input) {
-                case "tell": this.tellMenu(); break;
-                case "ask" : this.askMenu(); break;
+            String in = scanner.nextLine();
+            List<String> input = Arrays.asList(in.split(" "));
+            String command = input.get(0);
+            input.remove(0);
+            switch(command.trim()) {
+                case "tell": this.tellMenu(input); break;
+                case "ask" : this.askMenu(input); break;
                 case "exit": System.out.println("Goodbye!"); break;
                 default: System.out.println("Opzione non disponibile");
             }
+            if(command.equalsIgnoreCase("exit")) break;
         }
+        scanner.close();
     }
     
-    public void tellMenu() {
-        Map<String,String> map = new HashMap();
-        map.put("Receiver","");
-        map.put("Request","");
-        map.put("Params","");
-        String input = "";
-        for(int i = 0; i < map.size();i++) {
-            System.out.println("Inserisci "+new ArrayList(map.values()).get(i).toString()+": ");
-            input = scanner.nextLine();
-            map.replace(new ArrayList(map.values()).get(i).toString(), input);
-            if(input=="exit") break;
-        }
-        if(input!="exit") {
-            RestResponse sr=this.postRequest.apply(new Message(this.address, 
-                    map.get("Receiver"), "tell", map.get("Request"), 
-                    new ArrayList<String>(Arrays.asList(map.get("Params")
-                    .split(" ")))));
-            System.out.println(sr.getResponse());
-        }
+    public void tellMenu(List<String> input) {
+        input.forEach(s->System.out.println(s));
+        RestResponse rr = this.postRequest.apply(new Message(this.address,
+                input.get(0),"tell",input.get(1),input));
+        System.out.println("Res -> "+rr.getResponse());
     }
     
-    public void askMenu() {
+    public void askMenu(List<String> input) {
         //this.postRequest.apply();
     }
 }

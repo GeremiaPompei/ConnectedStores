@@ -34,7 +34,7 @@ public class ClientService implements Runnable {
     
     public void run() {
         ClientView view = 
-                new ClientView((mex)->this.postRequest(mex),this.senderAddress);
+                new ClientView((mex)-> this.postRequest(mex),this.senderAddress);
         view.start();
     }
 }

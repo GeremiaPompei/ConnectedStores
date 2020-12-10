@@ -14,9 +14,9 @@ public class Config {
     
     public void init() {
         Scanner scanner = new Scanner(System.in);
-        while(this.address=="") {
+        while(this.address.equals("")) {
             System.out.print("Inserisci indirizzo sender: ");
-            this.address = scanner.nextLine();
+            this.address = scanner.nextLine().trim();
         }
     }
     
