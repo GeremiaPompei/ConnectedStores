@@ -19,6 +19,19 @@ public class Message {
     private String request;
     private List<String> params;
     
+    public Message() {
+        
+    }
+    
+    public Message (String sender, String receiver, String type, String request, 
+            List<String> params) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.type = type;
+        this.request = request;
+        this.params = params;
+    }
+    
     public String getSender() {
         return this.sender;
     }

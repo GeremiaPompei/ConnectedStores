@@ -9,10 +9,14 @@ package com.example.model;
  *
  * @author geremiapompei
  */
-public class Response<T> {
+public class RestResponse<T> {
     T response;
     
-    public Response(T response) {
+    public RestResponse() {
+        
+    }
+    
+    public RestResponse(T response) {
         this.response = response;
     }
     

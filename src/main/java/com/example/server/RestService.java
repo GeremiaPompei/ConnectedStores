@@ -3,7 +3,6 @@ package com.example.server;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import com.example.model.*;
 
 /**
@@ -18,8 +17,8 @@ public class RestService {
      * @return String that will be returned as a text/plain response.
      */
     @POST
-    public Response getIt(Message message) {
+    public RestResponse getIt(Message message) {
         boolean res = message.getType().equals("tell");
-        return new Response(res);
+        return new RestResponse(res);
     }
 }
