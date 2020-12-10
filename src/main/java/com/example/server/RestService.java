@@ -1,9 +1,10 @@
-package com.example;
+package com.example.server;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import com.example.model.*;
 
 /**
  * Root resource (exposed at "api" path)
