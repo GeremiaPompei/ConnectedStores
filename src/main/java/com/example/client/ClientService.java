@@ -10,10 +10,10 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
+
 import com.example.model.*;
 import com.example.view.*;
-import java.util.ArrayList;
+
 /**
  *
  * @author geremiapompei
@@ -25,16 +25,15 @@ public class ClientService implements Runnable {
         this.senderAddress = address;
     }
     
-    private RestResponse postRequest(Message message){
+    public RestResponse postRequest(RestRequest restRequest){
         Client c = ClientBuilder.newClient();
-        WebTarget target = c.target(message.getReceiver()).path("api");
-        Response response = target.request().post(Entity.json(message));
+        WebTarget target = c.target(restRequest.getReceiver()).path("api");
+        Response response = target.request().post(Entity.json(restRequest));
         return response.readEntity(RestResponse.class);
     }
     
     public void run() {
-        ClientView view = 
-                new ClientView((mex)-> this.postRequest(mex),this.senderAddress);
+        ClientView view = new ClientView((mex)-> this.postRequest(mex),this.senderAddress);
         view.start();
     }
 }

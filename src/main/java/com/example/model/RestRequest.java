@@ -12,19 +12,19 @@ import java.util.List;
  * un formato specifico;
  * @author geremiapompei
  */
-public class Message {
+public class RestRequest {
     private String sender;
     private String receiver;
     private String type;
     private String request;
     private List<String> params;
     
-    public Message() {
+    public RestRequest() {
         
     }
     
-    public Message (String sender, String receiver, String type, String request, 
-            List<String> params) {
+    public RestRequest(String sender, String receiver, String type, String request,
+                       List<String> params) {
         this.sender = sender;
         this.receiver = receiver;
         this.type = type;

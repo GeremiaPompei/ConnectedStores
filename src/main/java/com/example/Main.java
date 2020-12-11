@@ -10,17 +10,14 @@
  */
 package com.example;
 
-import com.example.view.Config;
+import com.example.view.ConfigView;
 import com.example.server.ServerService;
 import com.example.client.ClientService;
-import java.util.ArrayList;
-import com.example.model.*;
-import java.util.concurrent.*;
 import java.util.concurrent.*;
 
 public class Main {
     public static void main(String [] args) {
-        Config config = new Config();
+        ConfigView config = new ConfigView();
         config.init();
         ExecutorService exec = Executors.newCachedThreadPool();
         exec.submit(new ServerService(config.getAddress()));

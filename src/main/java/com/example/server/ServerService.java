@@ -20,11 +20,9 @@ public class ServerService implements Runnable {
     }
     
     private void start() {
-        final HttpServer server;
         try {
-            server = this.startServer();
+            final HttpServer server = this.startServer();
             System.out.println("Server started: "+this.senderAddress);
-            System.in.read();
             //server.stop();
         } catch(Exception e) {
             e.printStackTrace();

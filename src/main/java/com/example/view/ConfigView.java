@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * @author geremiapompei
  */
-public class Config {
+public class ConfigView {
     private String address = "";
     
     public void init() {
