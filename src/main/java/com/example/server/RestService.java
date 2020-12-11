@@ -4,9 +4,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
-import com.example.model.*;
-
-import java.util.Locale;
+import com.example.model.RestRequest;
+import com.example.model.RestResponse;
 
 @Path("api")
 public class RestService {

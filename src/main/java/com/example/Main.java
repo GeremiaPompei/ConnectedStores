@@ -10,18 +10,18 @@
  */
 package com.example;
 
+import com.example.controller.Controller;
 import com.example.view.ConfigView;
 import com.example.server.ServerService;
 import com.example.client.ClientService;
+import com.example.view.ConsoleView;
+
 import java.util.concurrent.*;
 
 public class Main {
     public static void main(String [] args) {
-        ConfigView config = new ConfigView();
-        config.init();
-        ExecutorService exec = Executors.newCachedThreadPool();
-        exec.submit(new ServerService(config.getAddress()));
-        exec.submit(new ClientService(config.getAddress()));
-        exec.shutdown();
+        Controller controller = new Controller();
+        ConsoleView view = new ConsoleView();
+        view.start(controller);
     }
 }

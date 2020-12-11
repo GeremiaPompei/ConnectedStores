@@ -21,7 +21,9 @@ public class LocalStore {
     }
 
     public TestResource getResource(int id) {
-        return resources.stream().filter((res)->res.getId()==id).findAny().orElse(null);
+        return resources.stream().filter((res)->res.getId()==id)
+                .findAny()
+                .orElse(null);
     }
 
     public List<TestResource> getResources() {
@@ -38,7 +40,7 @@ public class LocalStore {
                     .filter((res) -> res.getId() != id).collect(Collectors.toList());
             return true;
         } else {
-            return true;
+            return false;
         }
     }
 

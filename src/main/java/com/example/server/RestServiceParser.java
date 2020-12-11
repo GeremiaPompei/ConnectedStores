@@ -3,6 +3,7 @@ package com.example.server;
 import com.example.model.LocalStore;
 import com.example.model.RestRequest;
 import com.example.model.TestResource;
+import com.example.view.ConsolePrinter;
 
 import java.util.List;
 
@@ -33,27 +34,17 @@ public class RestServiceParser {
 
     public TestResource get(RestRequest restRequest, String command) {
         int id = Integer.parseInt(restRequest.getParams().get(0));
-        print(command, localStore.getResource(id));
         return localStore.getResource(id);
     }
 
     public boolean remove(RestRequest restRequest, String command) {
-        try {
-            int id = Integer.parseInt(restRequest.getParams().get(0));
-            localStore.removeResource(id);
-            print(command, id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        int id = Integer.parseInt(restRequest.getParams().get(0));
+        print(command, id);
+        return localStore.removeResource(id);
     }
 
     private void print (String command, Object t) {
-        printServerFormat(command + " -> " + t.toString());
-        printServerFormat(localStore.toString());
-    }
-
-    private void printServerFormat(String s) {
-        System.out.println("[SERVER] : " + s);
+        ConsolePrinter.printServer(command + " -> " + t.toString());
+        ConsolePrinter.printServer(localStore.toString());
     }
 }

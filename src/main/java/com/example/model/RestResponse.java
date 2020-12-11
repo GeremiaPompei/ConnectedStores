@@ -9,22 +9,22 @@ package com.example.model;
  *
  * @author geremiapompei
  */
-public class RestResponse<T> {
-    T response;
+public class RestResponse {
+    Object response;
     
     public RestResponse() {
         
     }
     
-    public RestResponse(T response) {
+    public RestResponse(Object response) {
         this.response = response;
     }
     
-    public T getResponse() {
+    public Object getResponse() {
         return this.response;
     }
     
-    public void setResponse(T value) {
+    public void setResponse(Object value) {
         this.response = value;
     }
 }

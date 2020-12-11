@@ -14,11 +14,13 @@ import javax.ws.rs.core.Response;
 import com.example.model.*;
 import com.example.view.*;
 
+import java.util.concurrent.Callable;
+
 /**
  *
  * @author geremiapompei
  */
-public class ClientService implements Runnable {
+public class ClientService implements Callable<ClientService> {
     private String senderAddress;
     
     public ClientService(String address) {
@@ -32,8 +34,7 @@ public class ClientService implements Runnable {
         return response.readEntity(RestResponse.class);
     }
     
-    public void run() {
-        ClientView view = new ClientView((mex)-> this.postRequest(mex),this.senderAddress);
-        view.start();
+    public ClientService call() {
+        return this;
     }
 }
