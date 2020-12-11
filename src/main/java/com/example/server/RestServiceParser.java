@@ -20,31 +20,31 @@ public class RestServiceParser {
                 localStore.removeResource(id);
             TestResource resource = new TestResource(id, name, description);
             localStore.addResource(resource);
-            print(command, resource);
+            print(command, resource, restRequest.getSender());
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public List<TestResource> getAll(String command) {
-        print(command, localStore.getResources());
+    public List<TestResource> getAll(RestRequest request, String command) {
+        print(command, localStore.getResources(), request.getSender());
         return localStore.getResources();
     }
 
     public TestResource get(RestRequest restRequest, String command) {
         int id = Integer.parseInt(restRequest.getParams().get(0));
+        print(command, localStore.getResource(id), restRequest.getSender());
         return localStore.getResource(id);
     }
 
     public boolean remove(RestRequest restRequest, String command) {
         int id = Integer.parseInt(restRequest.getParams().get(0));
-        print(command, id);
+        print(command, id, restRequest.getSender());
         return localStore.removeResource(id);
     }
 
-    private void print (String command, Object t) {
-        ConsolePrinter.printServer(command + " -> " + t.toString());
-        ConsolePrinter.printServer(localStore.toString());
+    private void print(String command, Object t, String sender) {
+        ConsolePrinter.printServer(command + " -> " + t.toString(), sender);
     }
 }

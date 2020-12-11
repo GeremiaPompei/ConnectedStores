@@ -23,7 +23,7 @@ public class RestService {
                 restResponse.setResponse(parser.remove(restRequest, command));
                 break;
             case "get-all":
-                restResponse.setResponse(parser.getAll(command));
+                restResponse.setResponse(parser.getAll(restRequest, command));
                 break;
             case "get":
                 restResponse.setResponse(parser.get(restRequest, command));

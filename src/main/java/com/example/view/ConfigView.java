@@ -15,8 +15,8 @@ public class ConfigView {
     public void init() {
         Scanner scanner = new Scanner(System.in);
         while(this.address.equals("")) {
-            System.out.print("Inserisci indirizzo sender: ");
-            this.address = scanner.nextLine().trim();
+            System.out.print("Inserisci indirizzo IP del Sender: ");
+            this.address = "http://"+scanner.nextLine().trim()+":8080/";
         }
     }
     

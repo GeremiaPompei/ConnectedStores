@@ -6,11 +6,16 @@ public class ConsolePrinter {
     private static final String RESET = "\033[0m";
 
     public static void printClient(String s) {
-        System.out.println(CLIENT+"[CLIENT] : " + s+RESET);
+        System.out.println(CLIENT + "[CLIENT] : " + s + RESET);
     }
 
     public static void printServer(String s) {
-        System.out.println(SERVER+"[SERVER] : " + s+RESET);
+        System.out.print("\n" + SERVER + "[SERVER] : " + s + RESET + "\n > ");
+    }
+
+    public static void printServer(String s, String sender) {
+        System.out.print(SERVER + "Request from " + sender + RESET);
+        printServer(s);
     }
 
 }

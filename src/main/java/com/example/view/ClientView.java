@@ -26,7 +26,6 @@ public class ClientView {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                ConsolePrinter.printClient("Opzioni: [push, get-all, get , remove, local-store, help, exit]");
                 System.out.print(" > ");
                 String in = scanner.nextLine();
                 String[] singCmd = {in, "", ""};
@@ -37,6 +36,7 @@ public class ClientView {
                 switch (command) {
                     case "local-store":
                         ConsolePrinter.printClient(this.controller.getLocalStore().toString());
+                        break;
                     case "push":
                     case "remove":
                         this.tell(receiver, params, command);
@@ -46,14 +46,16 @@ public class ClientView {
                         this.ask(receiver, params, command);
                         break;
                     case "help":
-                        ConsolePrinter.printClient("\n   > opzione indirizzoReceiver request [params...]");
+                        ConsolePrinter.printClient("\n   > Opzioni: [push, get-all, get , remove, local-store, help" +
+                                ", exit]\n   > opzione indirizzoReceiver request [params...]");
                         break;
                     case "exit":
                         controller.stopServer();
                         ConsolePrinter.printClient("Goodbye!");
                         break;
                     default:
-                        ConsolePrinter.printClient("Opzione non disponibile");
+                        ConsolePrinter.printClient("Opzione non disponibile. Per vedere la lista delle opzioni " +
+                                "digitare il comando\n   > help");
                 }
                 if (command.equalsIgnoreCase("exit")) break;
             } catch (Exception e) {
@@ -72,7 +74,9 @@ public class ClientView {
     }
 
     private void miniController(String receiver, List<String> params, String command, String type) {
-        RestRequest restRequest = new RestRequest(this.controller.getAddress(), receiver, type, command, params);
+        RestRequest restRequest =
+                new RestRequest(this.controller.getAddress(), "http://" + receiver + ":8080/",
+                        type, command, params);
         RestResponse rr = this.controller.doRequest(restRequest);
         print(command, rr);
     }
