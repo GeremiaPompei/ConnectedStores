@@ -28,24 +28,29 @@ public class ClientView {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                printClientFormat("Opzioni: [push, pull, get ,remove, exit]\n > ");
+                printClientFormat("Opzioni: [push, get-all, get ,remove, help, exit]");
+                System.out.print(" > ");
                 String in = scanner.nextLine();
-                List<String> input = Arrays.asList(in.split(" "));
-                String command = input.get(0);
+                String [] singCmd = {in, "", ""};
+                List<String> input = Arrays.asList(in.contains(" ")?in.split(" "):singCmd);
+                String command = input.get(0).toLowerCase().trim();
                 String receiver = input.get(1);
                 List<String> params = input.subList(2, input.size());
-                switch (command.toLowerCase().trim()) {
+                switch (command) {
                     case "push":
-                        this.push(receiver, params);
+                        this.tell(receiver, params, command);
                         break;
                     case "get-all":
-                        this.getAll(receiver, params);
+                        this.ask(receiver, params, command);
                         break;
                     case "get":
-                        this.get(receiver, params);
+                        this.ask(receiver, params, command);
                         break;
                     case "remove":
-                        this.remove(receiver, params);
+                        this.tell(receiver, params, command);
+                        break;
+                    case "help":
+                        printClientFormat(" > opzione indirizzoReceiver request [params...]");
                         break;
                     case "exit":
                         printClientFormat("Goodbye!");
@@ -55,34 +60,25 @@ public class ClientView {
                 }
                 if (command.equalsIgnoreCase("exit")) break;
             } catch (Exception e) {
+                e.printStackTrace();
                 printClientFormat("Opzione non disponibile");
             }
         }
         scanner.close();
     }
 
-    private void push(String receiver, List<String> params) {
-        RestRequest restRequest = new RestRequest(this.address, receiver, "tell", "push", params);
-        RestResponse<TestResource> rr = this.postRequest.apply(restRequest);
-        print("push", rr);
+    private void tell(String receiver, List<String> params, String command) {
+        miniController(receiver, params, command, "tell");
     }
 
-    private void getAll(String receiver, List<String> params) {
-        RestRequest restRequest = new RestRequest(this.address, receiver, "ask", "get-all", params);
-        RestResponse<TestResource> rr = this.postRequest.apply(restRequest);
-        print("get-all", rr);
+    private void ask(String receiver, List<String> params, String command) {
+        miniController(receiver, params, command, "ask");
     }
 
-    private void get(String receiver, List<String> params) {
-        RestRequest restRequest = new RestRequest(this.address, receiver, "ask", "get", params);
+    private void miniController(String receiver, List<String> params, String command, String type) {
+        RestRequest restRequest = new RestRequest(this.address, receiver, type, command, params);
         RestResponse<TestResource> rr = this.postRequest.apply(restRequest);
-        print("get", rr);
-    }
-
-    private void remove(String receiver, List<String> params) {
-        RestRequest restRequest = new RestRequest(this.address, receiver, "tell", "remove", params);
-        RestResponse<Boolean> rr = this.postRequest.apply(restRequest);
-        print("remove", rr);
+        print(command, rr);
     }
 
     private void print(String s, RestResponse rr) {
