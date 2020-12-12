@@ -5,34 +5,58 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
-import javax.ws.rs.ProcessingException;
-import java.util.concurrent.*;
-import java.lang.Exception;
+import java.util.concurrent.Callable;
 import java.net.URI;
 
+/**
+ * Classe che ha la responsabilità di costruire oggetti server. Tali oggetti permettono di far partire e far terminare
+ * l'esecuzione di un server.
+ *
+ * @author geremiapompei
+ */
 public class ServerService implements Callable<ServerService> {
+    /**
+     * Variabile che tiene traccia del server del Sender.
+     */
     private String senderAddress;
+    /**
+     * Variabile che tiene traccia dell'istanza del server.
+     */
     private HttpServer server;
-    
+
+    /**
+     * Metodo costruttore.
+     *
+     * @param address Indirizzo per l'inizializzazione dell'indirizzo del server.
+     */
     public ServerService(String address) {
         this.senderAddress = address;
     }
-    
-    private HttpServer startServer() throws IllegalArgumentException {
-        final ResourceConfig rc = new ResourceConfig().packages("com.example.server");
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(this.senderAddress), rc);
-    }
-    
+
+    /**
+     * Metodo utile a far partire l'esecuzione di un server.
+     */
     private void start() {
-        this.server = this.startServer();
+        final ResourceConfig rc = new ResourceConfig().packages("com.example.server");
+        this.server = GrizzlyHttpServerFactory.createHttpServer(URI.create(this.senderAddress), rc);
         ConsolePrinter.printServer("Server started: " + this.senderAddress);
     }
 
+    /**
+     * Metodo utile a far terminare l'esecuzione di un server.
+     */
     public void close() {
         this.server.stop();
     }
-    
-    public ServerService call() throws IllegalArgumentException {
+
+    /**
+     * Metodo sovrascritto utile per far diventare tale server eseguibile in un thread e parallelizzarlo rispetto ad
+     * altre unità computazionali.
+     *
+     * @return Tale server per tenerne traccia.
+     */
+    @Override
+    public ServerService call() {
         this.start();
         return this;
     }

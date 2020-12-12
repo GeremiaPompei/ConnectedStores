@@ -1,29 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.example.view;
 
 import java.util.Scanner;
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.Arrays;
 
 import com.example.controller.Controller;
-import com.example.model.*;
+import com.example.model.RestRequest;
+import com.example.model.RestResponse;
 
 /**
+ * Classe che ha la responsabilità di costruire oggetti per fornire la vista del client con cui può interagire l'utente.
+ *
  * @author geremiapompei
  */
 public class ClientView {
+    /**
+     * Variabile utile per l'interazione con il model.
+     */
     private Controller controller;
 
+    /**
+     * Metodo costruttore.
+     *
+     * @param controller Inizializza la rispettiva variabile d'istanza.
+     */
     public ClientView(Controller controller) {
         this.controller = controller;
     }
 
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
+    /**
+     * Metodo utile per avviare la view per l'interazione con l'utente.
+     *
+     * @param scanner
+     */
+    public void start(Scanner scanner) {
         while (true) {
             try {
                 System.out.print(" > ");
@@ -46,8 +56,8 @@ public class ClientView {
                         this.ask(receiver, params, command);
                         break;
                     case "help":
-                        ConsolePrinter.printClient("\n   > Opzioni: [push, get-all, get , remove, local-store, help" +
-                                ", exit]\n   > opzione indirizzoReceiver request [params...]");
+                        ConsolePrinter.printClient("\n   > Opzioni: [push, get-all, get , remove, local-store, " +
+                                "help, exit]\n   > opzione indirizzoReceiver request [params...]");
                         break;
                     case "exit":
                         controller.stopServer();
@@ -65,23 +75,52 @@ public class ClientView {
         scanner.close();
     }
 
+    /**
+     * Metodo privato utile per inviare richieste rest di tipo tell.
+     *
+     * @param receiver Indirizzo di chi riceve il messaggio.
+     * @param params   Parametri del messaggio, sono argomenti della richiesta.
+     * @param command  Comando da parte del client che specifica la funzionalità richiesta al server.
+     */
     private void tell(String receiver, List<String> params, String command) {
-        miniController(receiver, params, command, "tell");
+        this.miniController(receiver, params, command, "tell");
     }
 
+    /**
+     * Metodo privato utile per inviare richieste rest di tipo ask.
+     *
+     * @param receiver Indirizzo di chi riceve il messaggio.
+     * @param params   Parametri del messaggio, sono argomenti della richiesta.
+     * @param command  Comando da parte del client che specifica la funzionalità richiesta al server.
+     */
     private void ask(String receiver, List<String> params, String command) {
-        miniController(receiver, params, command, "ask");
+        this.miniController(receiver, params, command, "ask");
     }
 
+    /**
+     * Metodo privato che ha la funzionalità di mini controllore che gestisce l'invio dei messaggi e la gestione delle
+     * risposte.
+     *
+     * @param receiver Indirizzo di chi riceve il messaggio.
+     * @param params   Parametri del messaggio, sono argomenti della richiesta.
+     * @param command  Comando da parte del client che specifica la funzionalità richiesta al server.
+     * @param type     Può essere o tell (risposta con un boolean) o ask (risposta con un oggetto).
+     */
     private void miniController(String receiver, List<String> params, String command, String type) {
         RestRequest restRequest =
-                new RestRequest(this.controller.getAddress(), "http://" + receiver + ":8080/",
+                new RestRequest(this.controller.getSenderAddress(), "http://" + receiver + ":8080/",
                         type, command, params);
         RestResponse rr = this.controller.doRequest(restRequest);
         print(command, rr);
     }
 
-    private void print(String s, RestResponse rr) {
-        ConsolePrinter.printClient(s + " -> " + rr.getResponse());
+    /**
+     * Metodo utile per la stampa a console dei risultati delle risposte.
+     *
+     * @param str Stringa da stampare.
+     * @param rr  Risposta rest contenente un oggetto generico.
+     */
+    private void print(String str, RestResponse rr) {
+        ConsolePrinter.printClient(str + " -> " + rr.getResponse());
     }
 }

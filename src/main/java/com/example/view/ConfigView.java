@@ -1,26 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.example.view;
+
+import com.example.controller.Controller;
+
 import java.util.Scanner;
+
 /**
+ * Classe che ha la responsabilità di costruire oggetti per fornire la vista della configurazione iniziale dell'app.
  *
  * @author geremiapompei
  */
 public class ConfigView {
-    private String address = "";
-    
-    public void init() {
-        Scanner scanner = new Scanner(System.in);
-        while(this.address.equals("")) {
-            System.out.print("Inserisci indirizzo IP del Sender: ");
-            this.address = "http://"+scanner.nextLine().trim()+":8080/";
-        }
+    /**
+     * Variabile per l'interazione con il model.
+     */
+    private Controller controller;
+
+    /**
+     * Metodo costruttore.
+     *
+     * @param controller Inizializza la rispettiva variabile d'istanza.
+     */
+    public ConfigView(Controller controller) {
+        this.controller = controller;
     }
-    
-    public String getAddress() {
-        return this.address;
+
+    /**
+     * Metodo che ha la responsabilità di inizializzare la configurazione facendo funzionare la vista a console.
+     *
+     * @param scanner
+     */
+    public void init(Scanner scanner) {
+        while (this.controller.getSenderAddress().equals("")) {
+            System.out.print("Inserisci indirizzo IP del Sender: ");
+            this.controller.setSenderAddress("http://" + scanner.nextLine().trim() + ":8080/");
+        }
     }
 }

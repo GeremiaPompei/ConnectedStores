@@ -2,40 +2,79 @@ package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Classe singleton utile per creare e gestire l'oggetto store locale.
+ *
+ * @author geremiapompei
+ */
 public class LocalStore {
-
-    private List<TestResource> resources;
+    /**
+     * Risorse dello store locale.
+     */
+    private List<Resource> resources;
+    /**
+     * Unica istanza di tale classe
+     */
     private static LocalStore istance;
 
+    /**
+     * Metodo costruttore.
+     */
     private LocalStore() {
         this.resources = new ArrayList<>();
     }
 
+    /**
+     * Metodo utile per ottenere la singola istanza dello store locale.
+     *
+     * @return
+     */
     public static LocalStore getIstance() {
         if (istance == null)
             istance = new LocalStore();
         return istance;
     }
 
-    public TestResource getResource(int id) {
-        return resources.stream().filter((res)->res.getId()==id)
+    /**
+     * Getter di una risorsa.
+     *
+     * @param id Id della risorsa ricercata.
+     * @return Risorsa ricercata.
+     */
+    public Resource getResource(int id) {
+        return resources.stream().filter((res) -> res.getId() == id)
                 .findAny()
                 .orElse(null);
     }
 
-    public List<TestResource> getResources() {
+    /**
+     * Getter delle risorse.
+     *
+     * @return
+     */
+    public List<Resource> getResources() {
         return resources;
     }
 
-    public void addResource(TestResource resource) {
+    /**
+     * Metodo per aggiungere una risorsa alla lista delle risorse.
+     *
+     * @param resource Risorsa da aggiungere.
+     */
+    public void addResource(Resource resource) {
         this.resources.add(resource);
     }
 
+    /**
+     * Metodo per rimuovere una risorsa alla lista delle risorse.
+     *
+     * @param id Risorsa da aggiungere.
+     * @return Riscontro positivo o negativo.
+     */
     public boolean removeResource(int id) {
-        if(getResource(id)!=null) {
+        if (getResource(id) != null) {
             this.resources = this.resources.stream()
                     .filter((res) -> res.getId() != id).collect(Collectors.toList());
             return true;
@@ -44,6 +83,11 @@ public class LocalStore {
         }
     }
 
+    /**
+     * Metodo utile per fornire la rappresentazione a stringa dell'oggetto creato da tale classe.
+     *
+     * @return Stringa rappresentante l'oggetto.
+     */
     @Override
     public String toString() {
         return "LocalStore{" +
