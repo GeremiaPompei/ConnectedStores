@@ -51,9 +51,9 @@ Appena il programma viene avviato viene chiesto
 
 Premuto *Enter* possiamo eseguire varie operazioni sugli stores disponibili (il nostro compreso).
 
-### 2.1 Operazioni Principali
+### 2.2 Operazioni Principali
 
-#### 2.2.1  Push
+#### 2.2.1 Push
 
 ``` push indirizzoIp idRisorsa nomeRisorsa descrizioneRisorsa ```   
 Comando per creata una risorsa ed inserirla all'interno dello store con l'indirizzo ip indicato. La risposta a tale    
