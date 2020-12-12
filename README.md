@@ -1,5 +1,5 @@
 # ConnectedStores
-##Indice
+## Indice
 
 1. <a href="#introduzione">Introduzione</a>
 2. <a href="#client">Client</a>
