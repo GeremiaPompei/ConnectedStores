@@ -2,16 +2,16 @@
 
 ## Indice
 
-1. <a href="#introduzione">Introduzione</a>
-2. <a href="#client">Client</a>    
-   2.1 <a href="#configurazione">Configurazione</a>    
-   2.2 <a href="#operazioni-principali">Operazioni-Principali</a>    
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1 <a href="#push">Push</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2 <a href="#remove">Remove</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3 <a href="#get">Get</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.4 <a href="#get-all">Get-all</a>    
-   2.3 <a href="#operazioni-secondarie">Operazioni-Secondarie</a>
-3. <a href="#server">Server</a>
+1. <a href="#1-introduzione">Introduzione</a>
+2. <a href="#2-client">Client</a>    
+   2.1 <a href="#21-configurazione">Configurazione</a>    
+   2.2 <a href="#22-operazioni-principali">Operazioni Principali</a>    
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1 <a href="#221-push">Push</a>     
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2 <a href="#222-remove">Remove</a>     
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3 <a href="#223-get">Get</a>     
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.4 <a href="#224-get-all">Get-all</a>    
+   2.3 <a href="#23-operazioni-secondarie">Operazioni-Secondarie</a>
+3. <a href="#3-server">Server</a>
 
 ## 1. Introduzione
 
@@ -51,7 +51,7 @@ Appena il programma viene avviato viene chiesto
 
 Premuto *Enter* possiamo eseguire varie operazioni sugli stores disponibili (il nostro compreso).
 
-### 2.1 Operazioni-Principali
+### 2.1 Operazioni Principali
 
 #### 2.2.1  Push
 
@@ -95,7 +95,7 @@ Comando per ottenere tutti i dati dello store con tale indirizzo ip. La risposta
 
 ``` [CLIENT] : get-all -> [dati] ```
 
-### 2.3 Operazioni-Secondarie
+### 2.3 Operazioni Secondarie
 
 - **local-store**: mostra tutte le risorse presenti nello store locale
 - **help**: mostra la lista delle operazioni e la dicitura di un comando
