@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jersey-prova.iml" filepath="$PROJECT_DIR$/jersey-prova.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ConnectedStores.iml" filepath="$PROJECT_DIR$/ConnectedStores.iml" />
     </modules>
   </component>
 </project>
