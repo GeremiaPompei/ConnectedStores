@@ -31,7 +31,7 @@ public class ClientView {
     /**
      * Metodo utile per avviare la view per l'interazione con l'utente.
      *
-     * @param scanner
+     * @param scanner Oggetto utile a prelevare le informazioni scritte dall'utente.
      */
     public void start(Scanner scanner) {
         while (true) {

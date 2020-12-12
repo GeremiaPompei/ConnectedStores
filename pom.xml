@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>jersey-prova</artifactId>
+    <artifactId>ConnectedStores</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>jersey-prova</name>
+    <name>ConnectedStores</name>
 
     <dependencyManagement>
         <dependencies>

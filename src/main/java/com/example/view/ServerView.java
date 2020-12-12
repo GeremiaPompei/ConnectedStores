@@ -7,8 +7,9 @@ import com.example.model.Resource;
 import java.util.List;
 
 /**
- * Classe utile per costruire oggetti che servono agli oggetti RestService per eseguire diverse diverse azioni in base
- * alle chiamate rest e stampare risultati a console.
+ * Classe utile per costruire oggetti che servono ai RestService per eseguire diverse diverse azioni in base alle
+ * chiamate rest e stampare risultati a console. Oltre alla parte di view questa classe fa svolgere ai propri oggetti
+ * il ruolo di computazione delle richieste che vengono trasformate nelle risposte rest.
  *
  * @author geremiapompei
  */
@@ -32,7 +33,7 @@ public class ServerView {
             String description = request.getParams().subList(2, request.getParams().size())
                     .stream().reduce((x, y) -> x + " " + y).get();
             if (localStore.getResource(id) != null)
-                localStore.removeResource(id);
+                return false;
             Resource resource = new Resource(id, name, description);
             localStore.addResource(resource);
             print(command, resource, request.getSender());

@@ -45,8 +45,8 @@ public class ConsolePrinter {
      * @param sender Sender del messaggio inviato al server.
      */
     public static void printServer(String str, String sender) {
-        System.out.print(SERVER + "Request from " + sender + RESET);
-        printServer("\n" + str);
+        System.out.println(SERVER + "Request from " + sender + RESET);
+        printServer(str);
         System.out.print(" > ");
     }
 

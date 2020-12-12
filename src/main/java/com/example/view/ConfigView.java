@@ -27,7 +27,7 @@ public class ConfigView {
     /**
      * Metodo che ha la responsabilità di inizializzare la configurazione facendo funzionare la vista a console.
      *
-     * @param scanner
+     * @param scanner Oggetto utile a prelevare le informazioni scritte dall'utente.
      */
     public void init(Scanner scanner) {
         while (this.controller.getSenderAddress().equals("")) {
