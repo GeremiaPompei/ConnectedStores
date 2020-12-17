@@ -70,6 +70,7 @@ public class ClientView {
                 if (command.equalsIgnoreCase("exit")) break;
             } catch (Exception e) {
                 ConsolePrinter.printClient("Opzione non disponibile");
+                e.printStackTrace();
             }
         }
         scanner.close();
@@ -108,7 +109,7 @@ public class ClientView {
      */
     private void miniController(String receiver, List<String> params, String command, String type) {
         RestRequest restRequest =
-                new RestRequest(this.controller.getSenderAddress(), "http://" + receiver + ":8080/",
+                new RestRequest(this.controller.getSenderAddress(), receiver,
                         type, command, params);
         RestResponse rr = this.controller.doRequest(restRequest);
         print(command, rr);

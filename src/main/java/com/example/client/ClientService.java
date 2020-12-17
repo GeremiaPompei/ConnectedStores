@@ -1,5 +1,6 @@
 package com.example.client;
 
+import javax.net.ssl.SSLContext;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -8,6 +9,9 @@ import javax.ws.rs.core.Response;
 
 import com.example.model.RestRequest;
 import com.example.model.RestResponse;
+import org.glassfish.jersey.SslConfigurator;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 
 import java.util.concurrent.Callable;
 
@@ -38,8 +42,16 @@ public class ClientService implements Callable<ClientService> {
      * @return Risposta computata.
      */
     public RestResponse postRequest(RestRequest restRequest) {
-        Client c = ClientBuilder.newClient();
-        WebTarget target = c.target(restRequest.getReceiver()).path("api");
+        final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
+        SslConfigurator sslConfig = SslConfigurator.newInstance()
+                .trustStoreFile("./ssl/myTrustStoreClient.jtr")
+                .trustStorePassword("password")
+                .keyStoreFile("./ssl/mykeystoreClient.jks")
+                .keyPassword("password");
+        final SSLContext sslContext = sslConfig.createSSLContext();
+        Client client = ClientBuilder.newBuilder().withConfig(clientConfig)
+                .sslContext(sslContext).build();
+        WebTarget target = client.target(restRequest.getReceiver()).path("api");
         Response response = target.request().post(Entity.json(restRequest));
         return response.readEntity(RestResponse.class);
     }

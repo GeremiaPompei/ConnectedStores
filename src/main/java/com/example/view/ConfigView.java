@@ -32,7 +32,7 @@ public class ConfigView {
     public void init(Scanner scanner) {
         while (this.controller.getSenderAddress().equals("")) {
             System.out.print("Inserisci indirizzo IP del Sender: ");
-            this.controller.setSenderAddress("http://" + scanner.nextLine().trim() + ":8080/");
+            this.controller.setSenderAddress(scanner.nextLine().trim());
         }
     }
 }

@@ -2,6 +2,8 @@ package com.example.server;
 
 import com.example.view.ConsolePrinter;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.ssl.SSLContextConfigurator;
+import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -37,8 +39,17 @@ public class ServerService implements Callable<ServerService> {
      * Metodo utile a far partire l'esecuzione di un server.
      */
     private void start() {
+        SSLContextConfigurator sslCtxConf = new SSLContextConfigurator();
+        sslCtxConf.setKeyStoreFile("./ssl/mykeystoreServer.jks");
+        sslCtxConf.setKeyStorePass("password");
+        sslCtxConf.setTrustStoreFile("./ssl/myTrustStoreServer.jtr");
+        sslCtxConf.setTrustStorePass("password");
         final ResourceConfig rc = new ResourceConfig().packages("com.example.server");
-        this.server = GrizzlyHttpServerFactory.createHttpServer(URI.create(this.senderAddress), rc);
+        this.server = GrizzlyHttpServerFactory.createHttpServer(
+                URI.create(this.senderAddress),
+                rc,
+                true,
+                new SSLEngineConfigurator(sslCtxConf, false, false, false));
         ConsolePrinter.printServer("Server started: " + this.senderAddress);
     }
 
