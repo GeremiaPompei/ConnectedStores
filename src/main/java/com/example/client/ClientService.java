@@ -45,9 +45,7 @@ public class ClientService implements Callable<ClientService> {
         final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
         SslConfigurator sslConfig = SslConfigurator.newInstance()
                 .trustStoreFile("./ssl/myTrustStoreClient.jtr")
-                .trustStorePassword("password")
-                .keyStoreFile("./ssl/mykeystoreClient.jks")
-                .keyPassword("password");
+                .trustStorePassword("password");
         final SSLContext sslContext = sslConfig.createSSLContext();
         Client client = ClientBuilder.newBuilder().withConfig(clientConfig)
                 .sslContext(sslContext).build();

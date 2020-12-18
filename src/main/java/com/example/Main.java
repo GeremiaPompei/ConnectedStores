@@ -15,6 +15,7 @@ public class Main {
      * @param args argomenti del metodo main.
      */
     public static void main(String[] args) {
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier((hostname, sslSession) -> true);
         Controller controller = new Controller();
         ConsoleView view = new ConsoleView();
         view.start(controller);

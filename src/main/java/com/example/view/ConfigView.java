@@ -31,7 +31,7 @@ public class ConfigView {
      */
     public void init(Scanner scanner) {
         while (this.controller.getSenderAddress().equals("")) {
-            System.out.print("Inserisci indirizzo IP del Sender: ");
+            System.out.print("Inserisci l'indirizzo su cui vuoi eseguire richieste e ricevere risposte: ");
             this.controller.setSenderAddress(scanner.nextLine().trim());
         }
     }
