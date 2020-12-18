@@ -44,6 +44,8 @@ public class ClientService implements Callable<ClientService> {
     public RestResponse postRequest(RestRequest restRequest) {
         final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
         SslConfigurator sslConfig = SslConfigurator.newInstance()
+                .keyStoreFile("./ssl/mykeystoreClient.jks")
+                .keyStorePassword("password")
                 .trustStoreFile("./ssl/myTrustStoreClient.jtr")
                 .trustStorePassword("password");
         final SSLContext sslContext = sslConfig.createSSLContext();

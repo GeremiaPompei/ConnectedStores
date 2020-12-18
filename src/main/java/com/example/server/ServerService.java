@@ -42,6 +42,8 @@ public class ServerService implements Callable<ServerService> {
         SSLContextConfigurator sslCtxConf = new SSLContextConfigurator();
         sslCtxConf.setKeyStoreFile("./ssl/mykeystoreServer.jks");
         sslCtxConf.setKeyStorePass("password");
+        sslCtxConf.setTrustStoreFile("./ssl/myTrustStoreServer.jtr");
+        sslCtxConf.setTrustStorePass("password");
         final ResourceConfig rc = new ResourceConfig().packages("com.example.server");
         this.server = GrizzlyHttpServerFactory.createHttpServer(
                 URI.create(this.senderAddress),
