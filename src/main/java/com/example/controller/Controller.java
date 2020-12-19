@@ -5,7 +5,12 @@ import com.example.model.LocalStore;
 import com.example.model.RestRequest;
 import com.example.model.RestResponse;
 import com.example.server.ServerService;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 
+import java.io.IOException;
+import java.net.URI;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -40,7 +45,7 @@ public class Controller {
      * @throws InterruptedException Eccezione di conclusione.
      */
     public void init() throws ExecutionException, InterruptedException {
-        ExecutorService exec = Executors.newCachedThreadPool();
+        ExecutorService exec = Executors.newFixedThreadPool(3);
         this.server = exec.submit(new ServerService(this.senderAddress)).get();
         this.client = exec.submit(new ClientService(this.senderAddress)).get();
         exec.shutdown();

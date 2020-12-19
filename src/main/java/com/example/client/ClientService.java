@@ -9,10 +9,15 @@ import javax.ws.rs.core.Response;
 
 import com.example.model.RestRequest;
 import com.example.model.RestResponse;
+import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 
+import java.nio.charset.StandardCharsets;
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -44,9 +49,9 @@ public class ClientService implements Callable<ClientService> {
     public RestResponse postRequest(RestRequest restRequest) {
         final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
         SslConfigurator sslConfig = SslConfigurator.newInstance()
-                .keyStoreFile("./ssl/mykeystoreClient.jks")
+                .keyStoreFile("./ssl/myKeyStore.jks")
                 .keyStorePassword("password")
-                .trustStoreFile("./ssl/myTrustStoreClient.jtr")
+                .trustStoreFile("./ssl/myTrustStore.jts")
                 .trustStorePassword("password");
         final SSLContext sslContext = sslConfig.createSSLContext();
         Client client = ClientBuilder.newBuilder().withConfig(clientConfig)

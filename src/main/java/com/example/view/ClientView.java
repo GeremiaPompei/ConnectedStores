@@ -70,7 +70,6 @@ public class ClientView {
                 if (command.equalsIgnoreCase("exit")) break;
             } catch (Exception e) {
                 ConsolePrinter.printClient("Opzione non disponibile");
-                e.printStackTrace();
             }
         }
         scanner.close();
