@@ -1,14 +1,17 @@
 package com.example.server;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
-import com.example.MyDomain;
-import com.example.Notification;
-import com.example.view.GUIView.GUIViewController;
+import com.example.model.RecEntity;
+import com.example.service.NotificationManager;
+import com.example.service.StringfyRec;
 import it.mynext.iaf.nettrs.Rec;
-import javafx.scene.control.TextArea;
+import org.glassfish.grizzly.http.server.Request;
 
 /**
  * Classe che risponde alle richieste effettuate dai client tramite i suoi metodi. Tali richieste vengono risposte da
@@ -18,14 +21,16 @@ import javafx.scene.control.TextArea;
  */
 @Path("api")
 public class RestService {
-    private static Rec rec;
+    private static RecEntity rec;
 
     @POST
     @Path("post")
-    public boolean postRec(Rec rec) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean postRec(RecEntity rec, @Context Request re) {
         try {
             this.rec = rec;
-            Notification.getInstance().push(rec + "");
+            NotificationManager.getInstance()
+                    .push(re.getRemoteAddr() + " : post\n" + StringfyRec.stringOf(rec));
             return true;
         } catch (Exception e) {
             return false;
@@ -34,13 +39,8 @@ public class RestService {
 
     @GET
     @Path("get")
-    public Rec getRec() {
-        Rec rv = new Rec();
-        rv.init(2, 1);
-        rv.setFldData(0, "curruek", Rec.FDT_STR, 51);
-        rv.setFldData(1, "nextruek", Rec.FDT_STR, 51);
-        rv.setValue("curruek", "codubi");
-        rv.setValue("nextruek", "");
+    public RecEntity getRec(@Context Request re) {
+        NotificationManager.getInstance().push(re.getRemoteAddr() + " : get\n" + StringfyRec.stringOf(rec));
         return rec;
     }
 }

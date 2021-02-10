@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.view.GUIView.GUIConfigStart;
+import com.example.view.GUIConfigStart;
 import javafx.application.Application;
 
 /**

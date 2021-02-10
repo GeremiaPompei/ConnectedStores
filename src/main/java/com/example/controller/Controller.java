@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.MyDomain;
+import com.example.service.MyDomain;
 import com.example.client.ClientService;
 import com.example.server.ServerService;
 
@@ -27,7 +27,7 @@ public class Controller {
         try {
             ExecutorService exec = Executors.newCachedThreadPool();
             server = exec.submit(() -> new ServerService(MyDomain.getInstance().getDomain())).get();
-            client = exec.submit(() -> new ClientService(MyDomain.getInstance().getDomain())).get();
+            client = exec.submit(() -> new ClientService()).get();
             exec.shutdown();
         } catch (Exception e) {
             e.printStackTrace();

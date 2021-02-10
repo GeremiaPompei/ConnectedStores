@@ -1,18 +1,21 @@
-package com.example.view.GUIView;
+package com.example.view;
 
-import com.example.MyDomain;
-import com.example.Notification;
+import com.example.service.RecBuilder;
+import com.example.service.MyDomain;
+import com.example.service.NotificationManager;
 import com.example.controller.Controller;
-import com.example.server.RestService;
-import it.mynext.iaf.nettrs.Rec;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,9 +35,9 @@ public class GUIViewController implements Initializable {
     private ObservableList<Integer> olMatrixSize;
 
     @FXML
-    ChoiceBox<Integer> rows;
+    ChoiceBox<Integer> fieldcount;
     @FXML
-    ChoiceBox<Integer> columns;
+    ChoiceBox<Integer> reccount;
     @FXML
     TextArea serverArea;
     @FXML
@@ -47,21 +50,25 @@ public class GUIViewController implements Initializable {
         olMatrixSize = FXCollections.observableArrayList();
         for (int i = 1; i < 11; i++)
             olMatrixSize.add(i);
-        rows.setItems(olMatrixSize);
-        columns.setItems(olMatrixSize);
-        Notification.getInstance().setTextArea(serverArea);
+        fieldcount.setItems(olMatrixSize);
+        reccount.setItems(olMatrixSize);
+        NotificationManager.getInstance().setTextArea(serverArea);
     }
 
     @FXML
     public void init() {
-        Rec rv = new Rec();
-        rv.init(2, 1);
-        rv.setFldData(0, "curruek", Rec.FDT_STR, 51);
-        rv.setFldData(1, "nextruek", Rec.FDT_STR, 51);
-        rv.setValue("curruek", "codubi");
-        rv.setValue("nextruek", "");
-        controller.getClient().postRec(rv, "https://" + ipReceiver.getText() + ":8080/");
-        this.notification.setText(rv.toString());
+        try {
+            RecBuilder.getInstance().reset();
+            RecBuilder.getInstance().getRec().init(fieldcount.getValue(), reccount.getValue());
+            RecBuilder.getInstance().setAddressReceiver("https://" + ipReceiver.getText() + ":8080/");
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/GUISetRec.fxml"));
+            stage.setTitle("Set REC [ " + MyDomain.getInstance().getDomain() + " ]");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        } catch (Exception e) {
+            notification.setText(e.getMessage());
+        }
     }
 
 

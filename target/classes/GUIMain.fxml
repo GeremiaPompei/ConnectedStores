@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIView.GUIViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIViewController">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1300.0" prefWidth="600.0">
          <children>
@@ -30,8 +30,8 @@
                   <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="600.0">
                     <buttons>
                         <TextField fx:id="ipReceiver" promptText="Ip receiver..." />
-                        <ChoiceBox fx:id="rows" prefWidth="150.0" />
-                        <ChoiceBox fx:id="columns" prefWidth="150.0" />
+                        <ChoiceBox fx:id="fieldcount" prefWidth="150.0" />
+                        <ChoiceBox fx:id="reccount" prefWidth="150.0" />
                       <Button mnemonicParsing="false" onAction="#init" text="Init" />
                     </buttons>
                   </ButtonBar>

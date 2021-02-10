@@ -5,13 +5,12 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIView.GUIConfigController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIConfigController">
    <children>
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <ChoiceBox fx:id="addresses" prefHeight="22.0" prefWidth="339.0" />
-          <Button mnemonicParsing="false" onAction="#selectAddress" text="Button" />
+          <Button mnemonicParsing="false" onAction="#selectAddress" prefHeight="27.0" text="Start" />
         </buttons>
       </ButtonBar>
    </children>

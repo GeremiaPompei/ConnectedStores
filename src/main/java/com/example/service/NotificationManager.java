@@ -1,28 +1,28 @@
-package com.example;
+package com.example.service;
 
 import javafx.scene.control.TextArea;
 
 import java.time.LocalDateTime;
 import java.util.Stack;
 
-public class Notification {
-    private static Notification notification;
+public class NotificationManager {
+    private static NotificationManager notification;
 
-    public static Notification getInstance() {
+    public static NotificationManager getInstance() {
         if (notification == null)
-            notification = new Notification();
+            notification = new NotificationManager();
         return notification;
     }
 
     private Stack<String> notifications;
     private TextArea textArea;
 
-    private Notification() {
+    private NotificationManager() {
         this.notifications = new Stack<>();
     }
 
-    public void push(String nw) {
-        notifications.push(LocalDateTime.now() + " -> " + nw);
+    public void push(String notification) {
+        notifications.push(LocalDateTime.now() + " -> " + notification);
         textArea.setText("");
         notifications.forEach(n -> textArea.setText(n + "\n" + textArea.getText()));
     }

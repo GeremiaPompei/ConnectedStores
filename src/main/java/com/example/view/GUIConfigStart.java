@@ -1,4 +1,4 @@
-package com.example.view.GUIView;
+package com.example.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ public class GUIConfigStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/GUIConfig.fxml"));
-        stage.setTitle("RESTJersey");
+        stage.setTitle("RESTJersey - config");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }

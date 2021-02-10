@@ -1,7 +1,6 @@
-package com.example.view.GUIView;
+package com.example.view;
 
-import com.example.MyDomain;
-import com.example.server.ServerService;
+import com.example.service.MyDomain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
