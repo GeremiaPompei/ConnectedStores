@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import com.example.model.RecEntity;
 import com.example.service.NotificationManager;
 import com.example.service.StringfyRec;
-import it.mynext.iaf.nettrs.Rec;
 import org.glassfish.grizzly.http.server.Request;
 
 /**

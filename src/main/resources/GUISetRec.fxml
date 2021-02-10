@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUISetRecController">
    <children>
       <GridPane prefHeight="406.0" prefWidth="600.0">
@@ -49,8 +48,11 @@
             <ChoiceBox fx:id="fieldType" prefHeight="27.0" prefWidth="114.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
             <Label text="TYPE" GridPane.columnIndex="6" GridPane.rowIndex="2" />
             <Label text="SIZE" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <TextField fx:id="recName" promptText="name..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="NAME" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="recName" promptText="name..." GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <TextField fx:id="ipReceiver" promptText="ip address...." GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="initfieldcount" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="initreccount" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#init" text="Init" GridPane.columnIndex="10" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

@@ -1,66 +1,53 @@
 package com.example.view;
 
-import com.example.service.RecBuilder;
 import com.example.service.MyDomain;
 import com.example.service.NotificationManager;
 import com.example.controller.Controller;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Classe che ha la responsabilità di fare da controller alla view principale
- * permettendo di renderla dinamica e gestire l'interazione con il controller
- * dell'MVC così da consentire l'utente di interfacciarsi in maniera dinamica
- * con il resto dell'applicazione.
- */
 public class GUIViewController implements Initializable {
 
     private Controller controller;
     @FXML
     Label notification;
 
-    private ObservableList<Integer> olMatrixSize;
-
-    @FXML
-    ChoiceBox<Integer> fieldcount;
-    @FXML
-    ChoiceBox<Integer> reccount;
     @FXML
     TextArea serverArea;
-    @FXML
-    TextField ipReceiver;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         controller = Controller.getInstance();
         controller.init();
-        olMatrixSize = FXCollections.observableArrayList();
-        for (int i = 1; i < 11; i++)
-            olMatrixSize.add(i);
-        fieldcount.setItems(olMatrixSize);
-        reccount.setItems(olMatrixSize);
         NotificationManager.getInstance().setTextArea(serverArea);
     }
 
     @FXML
-    public void init() {
+    public void get(ActionEvent actionEvent) {
         try {
-            RecBuilder.getInstance().reset();
-            RecBuilder.getInstance().getRec().init(fieldcount.getValue(), reccount.getValue());
-            RecBuilder.getInstance().setAddressReceiver("https://" + ipReceiver.getText() + ":8080/");
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/GUIGet.fxml"));
+            stage.setTitle("Get REC [ " + MyDomain.getInstance().getDomain() + " ]");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.show();
+        } catch (Exception e) {
+            notification.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void post(ActionEvent actionEvent) {
+        try {
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/GUISetRec.fxml"));
             stage.setTitle("Set REC [ " + MyDomain.getInstance().getDomain() + " ]");

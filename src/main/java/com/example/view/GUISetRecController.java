@@ -1,7 +1,6 @@
 package com.example.view;
 
 import com.example.controller.Controller;
-import com.example.service.RecBuilder;
 import com.example.model.RecEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,21 +35,27 @@ public class GUISetRecController implements Initializable {
     @FXML
     TextField recName;
 
+    @FXML
+    ChoiceBox<Integer> initfieldcount;
+    @FXML
+    ChoiceBox<Integer> initreccount;
+    @FXML
+    TextField ipReceiver;
+
+    private ObservableList<Integer> olMatrixSize;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        rec = RecBuilder.getInstance().getRec();
+        rec = new RecEntity();
+        olMatrixSize = FXCollections.observableArrayList();
+        for (int i = 1; i < 11; i++)
+            olMatrixSize.add(i);
+        initfieldcount.setItems(olMatrixSize);
+        initreccount.setItems(olMatrixSize);
         olFieldCount = FXCollections.observableArrayList();
         olRecCount = FXCollections.observableArrayList();
         olFieldType = FXCollections.observableArrayList();
         olFieldSize = FXCollections.observableArrayList();
-        for (int i = 0; i < rec.getFldcount(); i++)
-            olFieldCount.add(i);
-        fieldcount.setItems(olFieldCount);
-        for (int i = 0; i < rec.getReccount(); i++)
-            olRecCount.add(i);
-        reccount.setItems(olRecCount);
-        initFieldType();
-        initFieldSize();
     }
 
     private void initFieldType() {
@@ -73,6 +78,20 @@ public class GUISetRecController implements Initializable {
         fieldSize.setItems(olFieldSize);
     }
 
+    @FXML
+    public void init() {
+        rec.init(initfieldcount.getValue(), initreccount.getValue());
+        for (int i = 0; i < rec.getFldcount(); i++)
+            olFieldCount.add(i);
+        fieldcount.setItems(olFieldCount);
+        for (int i = 0; i < rec.getReccount(); i++)
+            olRecCount.add(i);
+        reccount.setItems(olRecCount);
+        initFieldType();
+        initFieldSize();
+    }
+
+    @FXML
     public void saveField(ActionEvent actionEvent) {
         try {
             rec.setFldData(fieldcount.getValue(), fieldName.getText(), fieldType.getValue(), fieldSize.getValue());
@@ -81,6 +100,7 @@ public class GUISetRecController implements Initializable {
         }
     }
 
+    @FXML
     public void saveRec(ActionEvent actionEvent) {
         try {
             rec.setValue(fieldcount.getValue(), reccount.getValue(), recValue.getText());
@@ -89,10 +109,11 @@ public class GUISetRecController implements Initializable {
         }
     }
 
+    @FXML
     public void done(ActionEvent event) {
         try {
             rec.setName(recName.getText());
-            Controller.getInstance().getClient().postRec(rec, RecBuilder.getInstance().getAddressReceiver());
+            Controller.getInstance().getClient().postRec(rec, "https://" + ipReceiver.getText() + ":8080/");
             ((Node) (event.getSource())).getScene().getWindow().hide();
         } catch (Exception e) {
             e.printStackTrace();

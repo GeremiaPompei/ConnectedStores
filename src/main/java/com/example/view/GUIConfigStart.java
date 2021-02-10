@@ -11,7 +11,7 @@ public class GUIConfigStart extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/GUIConfig.fxml"));
         stage.setTitle("RESTJersey - config");
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root, 600, 40));
         stage.show();
     }
 }

@@ -9,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.example.model.RecEntity;
-import it.mynext.iaf.nettrs.Rec;
 import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
@@ -29,11 +28,11 @@ public class ClientService {
         return response.readEntity(Boolean.class);
     }
 
-    public Rec getRec(String receiver) {
+    public RecEntity getRec(String receiver) {
         Client client = configClient();
         WebTarget target = client.target(receiver).path("api").path("get");
         Response response = target.request().get();
-        return response.readEntity(Rec.class);
+        return response.readEntity(RecEntity.class);
     }
 
     private Client configClient() {
