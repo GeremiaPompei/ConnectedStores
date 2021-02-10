@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.controller.Controller;
-import com.example.view.ConsoleView;
+import com.example.view.GUIView.GUIConfigStart;
+import javafx.application.Application;
 
 /**
  * Classe Main che ha ha la responsabilità di far partire l'app.
@@ -16,8 +16,6 @@ public class Main {
      */
     public static void main(String[] args) {
         javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier((hostname, sslSession) -> true);
-        Controller controller = new Controller();
-        ConsoleView view = new ConsoleView();
-        view.start(controller);
+        Application.launch(GUIConfigStart.class);
     }
 }

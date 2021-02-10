@@ -7,17 +7,12 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
-import com.example.model.RestRequest;
-import com.example.model.RestResponse;
-import org.glassfish.grizzly.ssl.SSLContextConfigurator;
+import it.mynext.iaf.nettrs.Rec;
+import javafx.application.Application;
 import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 
-import java.nio.charset.StandardCharsets;
-import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 /**
@@ -25,7 +20,7 @@ import java.util.concurrent.Callable;
  *
  * @author geremiapompei
  */
-public class ClientService implements Callable<ClientService> {
+public class ClientService {
     /**
      * Indirizzo del mittente.
      */
@@ -40,13 +35,7 @@ public class ClientService implements Callable<ClientService> {
         this.senderAddress = address;
     }
 
-    /**
-     * Metodo per eseguire una richiesta post.
-     *
-     * @param restRequest Richiesta rest inviata.
-     * @return Risposta computata.
-     */
-    public RestResponse postRequest(RestRequest restRequest) {
+    public boolean postRec(Rec rec, String receiver) {
         final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
         SslConfigurator sslConfig = SslConfigurator.newInstance()
                 .keyStoreFile("./ssl/myKeyStore.jks")
@@ -56,19 +45,23 @@ public class ClientService implements Callable<ClientService> {
         final SSLContext sslContext = sslConfig.createSSLContext();
         Client client = ClientBuilder.newBuilder().withConfig(clientConfig)
                 .sslContext(sslContext).build();
-        WebTarget target = client.target(restRequest.getReceiver()).path("api");
-        Response response = target.request().post(Entity.json(restRequest));
-        return response.readEntity(RestResponse.class);
+        WebTarget target = client.target(receiver).path("api").path("post");
+        Response response = target.request().post(Entity.json(rec));
+        return response.readEntity(Boolean.class);
     }
 
-    /**
-     * Metodo sovrascritto utile per far diventare tale client eseguibile in un thread e parallelizzarlo rispetto ad
-     * altre unità computazionali.
-     *
-     * @return Tale client per tenerne traccia.
-     */
-    @Override
-    public ClientService call() {
-        return this;
+    public Rec getRec(String receiver) {
+        final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
+        SslConfigurator sslConfig = SslConfigurator.newInstance()
+                .keyStoreFile("./ssl/myKeyStore.jks")
+                .keyStorePassword("password")
+                .trustStoreFile("./ssl/myTrustStore.jts")
+                .trustStorePassword("password");
+        final SSLContext sslContext = sslConfig.createSSLContext();
+        Client client = ClientBuilder.newBuilder().withConfig(clientConfig)
+                .sslContext(sslContext).build();
+        WebTarget target = client.target(receiver).path("api").path("get");
+        Response response = target.request().get();
+        return response.readEntity(Rec.class);
     }
 }
