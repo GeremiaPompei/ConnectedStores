@@ -61,25 +61,28 @@
                                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="165.0" />
                                                               </columnConstraints>
                                                               <rowConstraints>
-                                                                  <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="124.85873413085938" minHeight="10.0" prefHeight="83.72570037841797" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="151.89908599853516" minHeight="10.0" prefHeight="22.79766845703125" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="151.89908599853516" minHeight="10.0" prefHeight="41.70233154296875" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="131.54672241210938" minHeight="10.0" prefHeight="89.72756958007812" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="132.30746459960938" minHeight="10.0" prefHeight="114.27243041992188" vgrow="SOMETIMES" />
                                                               </rowConstraints>
                                                                <children>
-                                                                  <Button mnemonicParsing="false" onAction="#addField" prefHeight="27.0" prefWidth="154.0" text="Add field" GridPane.rowIndex="2" />
-                                                                  <TextField fx:id="fieldName" promptText="Name..." />
-                                                                  <ChoiceBox fx:id="fieldType" prefWidth="150.0" GridPane.columnIndex="1" />
-                                                                  <ChoiceBox fx:id="fieldSize" prefHeight="27.0" prefWidth="152.0" GridPane.columnIndex="2" />
-                                                                  <Button mnemonicParsing="false" onAction="#addRec" prefHeight="27.0" prefWidth="162.0" text="Add rec" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                                  <Button mnemonicParsing="false" onAction="#removeRec" prefHeight="27.0" prefWidth="156.0" text="Remove rec" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                                  <TextField fx:id="recValue" promptText="Value..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                                                  <Button mnemonicParsing="false" onAction="#removeField" prefHeight="27.0" prefWidth="155.0" text="Remove field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                                  <TextField fx:id="recName" promptText="Name rec..." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                                  <Button mnemonicParsing="false" onAction="#send" prefHeight="27.0" prefWidth="159.0" text="Send!" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                                  <Button mnemonicParsing="false" onAction="#setValue" prefHeight="27.0" prefWidth="156.0" text="Set value" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                                                  <TextField fx:id="ipReceiver" promptText="Ip address.." GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                                  <Button mnemonicParsing="false" onAction="#setRec" prefHeight="27.0" prefWidth="176.0" text="Set rec" GridPane.columnIndex="3" />
+                                                                  <Button mnemonicParsing="false" onAction="#addField" prefHeight="44.0" prefWidth="148.0" text="Add field" />
+                                                                  <TextField fx:id="fieldName" promptText="Name..." GridPane.rowIndex="2" />
+                                                                  <ChoiceBox fx:id="fieldType" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <ChoiceBox fx:id="fieldSize" prefHeight="27.0" prefWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                                  <Button mnemonicParsing="false" onAction="#addRec" prefHeight="45.0" prefWidth="149.0" text="Add rec" GridPane.columnIndex="2" />
+                                                                  <Button mnemonicParsing="false" onAction="#removeRec" prefHeight="45.0" prefWidth="149.0" text="Remove rec" GridPane.columnIndex="3" />
+                                                                  <TextField fx:id="recValue" promptText="Value..." GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                                  <Button mnemonicParsing="false" onAction="#removeField" prefHeight="45.0" prefWidth="148.0" text="Remove field" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="recName" promptText="Name rec..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <Button mnemonicParsing="false" onAction="#post" prefHeight="27.0" prefWidth="159.0" text="Post" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                                  <Button mnemonicParsing="false" onAction="#setValue" prefHeight="27.0" prefWidth="156.0" text="Set value" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                                  <TextField fx:id="ipAddressPost" promptText="Ip address.." GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                                  <Button mnemonicParsing="false" onAction="#setField" prefHeight="30.0" prefWidth="169.0" text="Set field" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                                  <Label prefHeight="17.0" prefWidth="58.0" text="TYPE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <Label prefHeight="17.0" prefWidth="44.0" text="SIZE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                                                </children>
                                                             </GridPane>
                                                          </children>
@@ -103,11 +106,11 @@
                                                     <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="317.78056716918945" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <TextArea fx:id="textArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                                                      <TextArea fx:id="clientArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                                                       <ButtonBar prefHeight="40.0" prefWidth="200.0">
                                                         <buttons>
-                                                            <TextField fx:id="ipAddress" promptText="ip address..." />
-                                                          <Button mnemonicParsing="false" onAction="#done" text="DONE" />
+                                                            <TextField fx:id="ipAddressGet" promptText="ip address..." />
+                                                          <Button mnemonicParsing="false" onAction="#get" text="Get" />
                                                         </buttons>
                                                       </ButtonBar>
                                                    </children>
@@ -127,7 +130,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <Label fx:id="notification" prefHeight="60.0" prefWidth="1200.0" GridPane.rowIndex="1" />
+                  <Label fx:id="notification" prefHeight="60.0" prefWidth="1200.0" textFill="RED" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>
