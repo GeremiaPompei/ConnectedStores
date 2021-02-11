@@ -6,7 +6,8 @@
 2. <a href="#2-client">Client</a>    
    2.1 <a href="#21-configurazione">Configurazione</a>    
    2.2 <a href="#22-post">POST</a>    
-   2.3 <a href="#23-get">GET</a>
+   2.3 <a href="#23-get">GET</a>   
+   2.3 <a href="#24-delete">DELETE</a>
 3. <a href="#3-server">Server</a>
 4. <a href="#4-ssl">SSL</a>
 
@@ -21,7 +22,7 @@ motivo essa comprende due parti fondamentali in cui viene divisa:
 
 Entrambi i lati coesistono insieme parallelamente.
 
-In tale applicazione "giocattolo" viene creata o ottenuta una risorsa **Rec** tramite chiamate *REST* di tipo *POST* e *GET*.
+In tale applicazione "giocattolo" viene creata o ottenuta una risorsa **Rec** tramite chiamate *REST* di tipo *POST*, *DELETE* e *GET*.
 
 <a href="#indice">^ back ^</a>
 
@@ -59,13 +60,19 @@ Per creare una risorsa **Rec** basta aggiungere i campi *Field* e *Rec* tramite 
 
 - Per settare un **Rec** basta premere nella relativa casella sulla tabella in alto a sinistra e immettere il campo *value*. Dopodichè basta premere il pulsante *Set* *rec*.
 
-Per finire la procedura di invio basta immettere il nome del *Rec*, l'indirizzo ip del destinatario e premere il pulsante *POST*.
+Per finire la procedura di invio basta immettere il nome del *Rec*, l'indirizzo ip del destinatario e premere il pulsante *Post*.
 
 ### 2.3 GET
 
 Tramite la senzione apposita è possibile visualizzare una risorsa *Rec* dato l'indirizzo ip dell'host di chi la possiede.
 
-Per fare ciò basta immetter l'indirizzo ip e ottenere la risorsa premendo il pulsante *GET*. La risorsa apparirà nell'are di testo sottostante al pulsante.
+Per fare ciò basta immettere l'indirizzo ip e ottenere la risorsa premendo il pulsante *Get*. La risorsa apparirà nell'are di testo sottostante al pulsante.
+
+### 2.4 DELETE
+
+Tramite la senzione apposita è possibile eliminare una risorsa *Rec* dato l'indirizzo ip dell'host di chi la possiede.
+
+Per fare ciò basta immettere l'indirizzo ip ed eliminare la risorsa premendo il pulsante *Delete*.
 
 <a href="#indice">^ back ^</a>
 
