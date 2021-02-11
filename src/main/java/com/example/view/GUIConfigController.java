@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.net.InetAddress;
@@ -21,12 +22,33 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller dell'interfaccia grafica GUIConfig.fxml.
+ */
 public class GUIConfigController implements Initializable {
+
+    /**
+     * Label utile per mostrare notifiche.
+     */
+    @FXML
+    Label notification;
+    /**
+     * Lista degli indirizzi ip disponibili nel calcolatore.
+     */
     private ObservableList<String> olAddresses;
 
+    /**
+     * Choice box con la quale scegliere l'indirizzo ip.
+     */
     @FXML
     ChoiceBox<String> addresses;
 
+    /**
+     * Metodo inizializzatore.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -40,23 +62,28 @@ public class GUIConfigController implements Initializable {
             }
             addresses.setItems(olAddresses);
         } catch (SocketException e) {
-            e.printStackTrace();
+            notification.setText(e.getMessage());
         }
     }
 
+    /**
+     * Metodo utile a selezionare un indirizzo ip scelto nella choiceBox.
+     *
+     * @param event Evento di selezione.
+     */
     @FXML
     public void selectAddress(Event event) {
         try {
             if (addresses.getValue() == null)
-                throw new Exception();
+                throw new Exception("Seleziona un indirizzo ip.");
             MyDomain.getInstance().setAddress(addresses.getValue());
             Stage stage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/GUIMain.fxml"));
             stage.setTitle("RESTJersey [ " + MyDomain.getInstance().getDomain() + " ]");
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 1000, 800));
             stage.show();
         } catch (Exception e) {
-            e.printStackTrace();
+            notification.setText(e.getMessage());
         }
     }
 }

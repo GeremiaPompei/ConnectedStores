@@ -20,8 +20,18 @@ import org.glassfish.grizzly.http.server.Request;
  */
 @Path("api")
 public class RestService {
+    /**
+     * Stato del rec contenuto in tale server.
+     */
     private static RecEntity rec;
 
+    /**
+     * Metodo utile per rispondere a chiamate REST con metodo POST.
+     *
+     * @param rec Oggetto inviato.
+     * @param re  Richiesta REST effettuata.
+     * @return Riscontro positivo o negativo se l'operazione ha avuto successo o no.
+     */
     @POST
     @Path("post")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -36,6 +46,12 @@ public class RestService {
         }
     }
 
+    /**
+     * Metodo utile per rispondere a chiamate REST con metodo GET.
+     *
+     * @param re Richiesta REST effettuata.
+     * @return Oggetto richiesto.
+     */
     @GET
     @Path("get")
     public RecEntity getRec(@Context Request re) {

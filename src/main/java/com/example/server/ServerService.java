@@ -16,6 +16,9 @@ import java.net.URI;
  */
 public class ServerService {
 
+    /**
+     * Riferimento al server inizializzato tramite start.
+     */
     private HttpServer server;
 
     /**
@@ -45,6 +48,9 @@ public class ServerService {
         System.out.println("Server started: " + senderAddress);
     }
 
+    /**
+     * Metodo utile a far terminare l'esecuzione del server.
+     */
     public void stop() {
         this.server.stop();
     }

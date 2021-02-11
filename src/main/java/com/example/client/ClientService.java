@@ -20,6 +20,13 @@ import org.glassfish.jersey.client.HttpUrlConnectorProvider;
  */
 public class ClientService {
 
+    /**
+     * Metodo utile per fare chiamate REST con metodo POST.
+     *
+     * @param rec      Oggetto inviato.
+     * @param receiver Indirizzo destinatario.
+     * @return riscontro positivo o negativo in caso di successo o no.
+     */
     public boolean postRec(RecEntity rec, String receiver) {
         Client client = configClient();
         WebTarget target = client.target(receiver).path("api").path("post");
@@ -28,6 +35,12 @@ public class ClientService {
         return response.readEntity(Boolean.class);
     }
 
+    /**
+     * Metodo utile per fare chiamate REST con metodo GET.
+     *
+     * @param receiver Indirizzo destinatario.
+     * @return Oggetto richiesto.
+     */
     public RecEntity getRec(String receiver) {
         Client client = configClient();
         WebTarget target = client.target(receiver).path("api").path("get");
@@ -35,6 +48,11 @@ public class ClientService {
         return response.readEntity(RecEntity.class);
     }
 
+    /**
+     * Metodo privato utile per configuarare le chiamate REST.
+     *
+     * @return Oggetto utile per eseguire le chiamate REST.
+     */
     private Client configClient() {
         final ClientConfig clientConfig = new ClientConfig().connectorProvider(new HttpUrlConnectorProvider());
         SslConfigurator sslConfig = SslConfigurator.newInstance()

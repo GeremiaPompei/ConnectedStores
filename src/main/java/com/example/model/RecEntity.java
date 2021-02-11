@@ -2,6 +2,9 @@ package com.example.model;
 
 import it.mynext.iaf.nettrs.Rec;
 
+/**
+ * Classe utile per creare oggetti Rec capaci di essere serializzati e deserializzati in json tramite metodi get e set.
+ */
 public class RecEntity extends Rec {
     public int getCurrec() {
         return currec;
