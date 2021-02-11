@@ -1,5 +1,6 @@
 package com.example.server;
 
+import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.ssl.SSLContextConfigurator;
 import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -14,6 +15,8 @@ import java.net.URI;
  * @author geremiapompei
  */
 public class ServerService {
+
+    private HttpServer server;
 
     /**
      * Metodo costruttore.
@@ -34,12 +37,16 @@ public class ServerService {
         sslCtxConf.setTrustStoreFile("./ssl/myTrustStore.jts");
         sslCtxConf.setTrustStorePass("password");
         final ResourceConfig rc = new ResourceConfig().packages("com.example.server");
-        GrizzlyHttpServerFactory.createHttpServer(
+        this.server = GrizzlyHttpServerFactory.createHttpServer(
                 URI.create(senderAddress),
                 rc,
                 true,
                 new SSLEngineConfigurator(sslCtxConf, false, false, false));
         System.out.println("Server started: " + senderAddress);
+    }
+
+    public void stop() {
+        this.server.stop();
     }
 }
 

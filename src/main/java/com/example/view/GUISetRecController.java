@@ -80,6 +80,8 @@ public class GUISetRecController implements Initializable {
 
     @FXML
     public void init() {
+        olFieldCount.removeAll(olFieldCount);
+        olRecCount.removeAll(olRecCount);
         rec.init(initfieldcount.getValue(), initreccount.getValue());
         for (int i = 0; i < rec.getFldcount(); i++)
             olFieldCount.add(i);
@@ -92,7 +94,7 @@ public class GUISetRecController implements Initializable {
     }
 
     @FXML
-    public void saveField(ActionEvent actionEvent) {
+    public void saveField() {
         try {
             rec.setFldData(fieldcount.getValue(), fieldName.getText(), fieldType.getValue(), fieldSize.getValue());
         } catch (Exception e) {
@@ -101,7 +103,7 @@ public class GUISetRecController implements Initializable {
     }
 
     @FXML
-    public void saveRec(ActionEvent actionEvent) {
+    public void saveRec() {
         try {
             rec.setValue(fieldcount.getValue(), reccount.getValue(), recValue.getText());
         } catch (Exception e) {
