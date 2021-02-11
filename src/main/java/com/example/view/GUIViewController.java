@@ -110,6 +110,12 @@ public class GUIViewController implements Initializable {
     TextArea clientArea;
 
     /**
+     * Campo di testo dell'indirizzo ip del destinatario della richiesta DELETE.
+     */
+    @FXML
+    TextField ipAddressDelete;
+
+    /**
      * Area di testo utile per mostrare i messaggi del server.
      */
     @FXML
@@ -326,7 +332,24 @@ public class GUIViewController implements Initializable {
      */
     public void get() {
         try {
-            clientArea.setText(StringfyRec.stringOf(Controller.getInstance().getClient().getRec("https://" + ipAddressGet.getText() + ":8080/")));
+            RecEntity rec = Controller.getInstance().getClient().getRec("https://" + ipAddressGet.getText() + ":8080/");
+            if (rec == null)
+                throw new Exception("La richiesta GET non è andata a buon fine!");
+            clientArea.setText(StringfyRec.stringOf(rec));
+        } catch (Exception e) {
+            notification.setText(e.getMessage());
+        }
+    }
+
+    /**
+     * Metodo utile ad inviare una richiesta DELETE.
+     */
+    public void delete() {
+        try {
+            boolean b = Controller.getInstance().getClient().deleteRec("https://" + ipAddressDelete.getText() + ":8080/");
+            if (!b) {
+                notification.setText("La richiesta DELETE non è andata a buon fine perchè probabilmente la risorsa è gia stata eliminata!");
+            }
         } catch (Exception e) {
             notification.setText(e.getMessage());
         }

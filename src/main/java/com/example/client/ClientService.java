@@ -49,6 +49,19 @@ public class ClientService {
     }
 
     /**
+     * Metodo utile per fare chiamate REST con metodo DELETE.
+     *
+     * @param receiver Indirizzo destinatario.
+     * @return Riscontro positivo o negativo in caso di successo o meno.
+     */
+    public boolean deleteRec(String receiver) {
+        Client client = configClient();
+        WebTarget target = client.target(receiver).path("api").path("delete");
+        Response response = target.request().delete();
+        return response.readEntity(Boolean.class);
+    }
+
+    /**
      * Metodo privato utile per configuarare le chiamate REST.
      *
      * @return Oggetto utile per eseguire le chiamate REST.

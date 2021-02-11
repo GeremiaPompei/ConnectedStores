@@ -1,9 +1,6 @@
 package com.example.server;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -57,5 +54,21 @@ public class RestService {
     public RecEntity getRec(@Context Request re) {
         NotificationManager.getInstance().push(re.getRemoteAddr() + " : get\n" + StringfyRec.stringOf(rec));
         return rec;
+    }
+
+    /**
+     * Metodo utile per rispondere a chiamate REST con metodo GET.
+     *
+     * @param re Richiesta REST effettuata.
+     * @return Oggetto richiesto.
+     */
+    @DELETE
+    @Path("delete")
+    public boolean deleteRec(@Context Request re) {
+        NotificationManager.getInstance().push(re.getRemoteAddr() + " : delete\n");
+        if (rec == null)
+            return false;
+        rec = null;
+        return true;
     }
 }

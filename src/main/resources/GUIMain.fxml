@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.GUIViewController">
    <children>
       <AnchorPane prefHeight="1000.0" prefWidth="600.0">
          <children>
@@ -26,11 +26,11 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="773.6349792480469" minHeight="10.0" prefHeight="771.7760925292969" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="390.7055969238281" minHeight="10.0" prefHeight="28.223907470703125" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="390.7055969238281" minHeight="10.0" prefHeight="38.840524673461914" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="773.6349792480469" minHeight="10.0" prefHeight="561.1594753265381" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="549.0" prefWidth="1200.0">
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="1000.0" GridPane.rowIndex="1">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
@@ -63,9 +63,9 @@
                                                               <rowConstraints>
                                                                 <RowConstraints maxHeight="124.85873413085938" minHeight="10.0" prefHeight="83.72570037841797" vgrow="SOMETIMES" />
                                                                   <RowConstraints maxHeight="151.89908599853516" minHeight="10.0" prefHeight="22.79766845703125" vgrow="SOMETIMES" />
-                                                                  <RowConstraints maxHeight="151.89908599853516" minHeight="10.0" prefHeight="41.70233154296875" vgrow="SOMETIMES" />
-                                                                <RowConstraints maxHeight="131.54672241210938" minHeight="10.0" prefHeight="89.72756958007812" vgrow="SOMETIMES" />
-                                                                <RowConstraints maxHeight="132.30746459960938" minHeight="10.0" prefHeight="114.27243041992188" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="151.89908599853516" minHeight="10.0" prefHeight="34.5" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="131.54672241210938" minHeight="10.0" prefHeight="53.883636474609375" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="132.30746459960938" minHeight="10.0" prefHeight="51.116363525390625" vgrow="SOMETIMES" />
                                                               </rowConstraints>
                                                                <children>
                                                                   <Button mnemonicParsing="false" onAction="#addField" prefHeight="44.0" prefWidth="148.0" text="Add field" />
@@ -102,8 +102,8 @@
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
-                                                    <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="44.21943283081055" vgrow="SOMETIMES" />
-                                                    <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="317.78056716918945" vgrow="SOMETIMES" />
+                                                    <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="34.340370178222656" vgrow="SOMETIMES" />
+                                                    <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="209.15962982177734" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
                                                       <TextArea fx:id="clientArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
@@ -119,6 +119,31 @@
                                           </AnchorPane>
                                     </content>
                                   </Tab>
+                                    <Tab text="DELETE">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane prefHeight="422.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="32.59722900390625" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="210.40277099609375" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                                                         <buttons>
+                                                            <TextField fx:id="ipAddressDelete" promptText="ip address..." />
+                                                            <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
+                                                         </buttons>
+                                                      </ButtonBar>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </Tab>
                                 </tabs>
                               </TabPane>
                            </children>
@@ -130,7 +155,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <Label fx:id="notification" prefHeight="60.0" prefWidth="1200.0" textFill="RED" GridPane.rowIndex="1" />
+                  <Label fx:id="notification" prefHeight="60.0" prefWidth="1200.0" textFill="RED" />
                </children>
             </GridPane>
          </children>

@@ -80,7 +80,7 @@ public class GUIConfigController implements Initializable {
             Stage stage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("/GUIMain.fxml"));
             stage.setTitle("RESTJersey [ " + MyDomain.getInstance().getDomain() + " ]");
-            stage.setScene(new Scene(root, 1000, 800));
+            stage.setScene(new Scene(root, 1000, 600));
             stage.show();
         } catch (Exception e) {
             notification.setText(e.getMessage());
