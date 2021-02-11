@@ -1,22 +1,18 @@
-# ConnectedStores
+# RESTService
 
 ## Indice
 
 1. <a href="#1-introduzione">Introduzione</a>
 2. <a href="#2-client">Client</a>    
    2.1 <a href="#21-configurazione">Configurazione</a>    
-   2.2 <a href="#22-operazioni-principali">Operazioni Principali</a>    
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1 <a href="#221-push">Push</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2 <a href="#222-remove">Remove</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3 <a href="#223-get">Get</a>     
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.4 <a href="#224-get-all">Get-all</a>    
-   2.3 <a href="#23-operazioni-secondarie">Operazioni-Secondarie</a>
+   2.2 <a href="#22-post">POST</a>    
+   2.3 <a href="#23-get">GET</a>
 3. <a href="#3-server">Server</a>
 4. <a href="#4-ssl">SSL</a>
 
 ## 1. Introduzione
 
-**ConnectedStores** è un'applicazione sviluppata per testare le funzionalità del framework Jersey. Proprio per
+**RESTService** è un'applicazione sviluppata per testare le funzionalità del framework Jersey. Proprio per
 questo    
 motivo essa comprende due parti fondamentali in cui viene divisa:
 
@@ -25,10 +21,7 @@ motivo essa comprende due parti fondamentali in cui viene divisa:
 
 Entrambi i lati coesistono insieme parallelamente.
 
-In tale applicazione "giocattolo" vi è un local store che può contenere delle risorse. Queste ultime possono essere    
-create, visualizzate o rimosse. Avendo più macchine con tale applicazione avviata si possono caricare o modificare
-le    
-risorse negli store altrui.
+In tale applicazione "giocattolo" viene creata o ottenuta una risorsa **Rec** tramite chiamate *REST* di tipo *POST* e *GET*.
 
 <a href="#indice">^ back ^</a>
 
@@ -36,7 +29,7 @@ risorse negli store altrui.
 
 ### 2.1 Configurazione
 
-Per eseguire **ConnectedStores** bisogna aver scaricato precedentemente **java 11** e **Maven**. Per eseguire    
+Per eseguire **RESTService** bisogna aver scaricato precedentemente **java 11** e **Maven**. Per eseguire    
 l'applicazione dopo averla scaricate basta aprire il terminale ed accedere all'interno di questa cartella con il comando
 
 ``` 
@@ -55,106 +48,31 @@ Arrivati a questo punto finalmente possiamo avviare l'app con il comando
 mvn exec:java 
 ```   
 
-Appena il programma viene avviato viene chiesto
+Appena il programma viene avviato apparirà una schermata di configurazione iniziale dove l'utente potrà selezionare l'indirizzo IP dove far partire le istanze del client e del server.
 
-- l'**indirizzo del sender**, ovvero l'indirizzo dal quale inviare richieste rest e sul quale riceverle (
-  es. https://localhost:8080/).
+### 2.2 POST
 
-Premuto *Enter* possiamo eseguire varie operazioni sugli stores disponibili (il nostro compreso).
+Tramite la sezione apposita può essere costruito un oggetto Rec e inviato tramite una chiamata *REST* di tipo *POST*.
 
-### 2.2 Operazioni Principali
+Per creare una risorsa **Rec** basta aggiungere i campi *Field* e *Rec* tramite gli appositi pulsanti e settarli in tal modo:
+- Per settare un **FIELD** basta premere nella relativa colonna sulla tabella in alto a sinistra e immettere i campi *name*, *type* e *size*. Dopodichè basta premere il pulsante *Set* *field*.
 
-#### 2.2.1 Push
+- Per settare un **Rec** basta premere nella relativa casella sulla tabella in alto a sinistra e immettere il campo *value*. Dopodichè basta premere il pulsante *Set* *rec*.
 
-``` 
-push indirizzoDestinatario idRisorsa nomeRisorsa descrizioneRisorsa 
-```   
+Per finire la procedura di invio basta immettere il nome del *Rec*, l'indirizzo ip del destinatario e premere il pulsante *POST*.
 
-Comando per creata una risorsa ed inserirla all'interno dello store con l'indirizzo indicato. La risposta a tale    
-messaggio sarà
+## 2.2 GET
 
-``` 
-[CLIENT] : push -> true 
-```   
+Tramite la senzione apposita è possibile visualizzare una risorsa *Rec* dato l'indirizzo ip dell'host di chi la possiede.
 
-se l'operazione è avvenuta con successo o
-
-``` 
-[CLIENT] : push -> false 
-```   
-
-altrimenti. Se viene inserita una risorsa con lo stesso id di un'altra gia presente in quello store l'operazione di  
-push    
-fallisce.
-
-#### 2.2.2 Remove
-
-``` 
-remove indirizzoDestinatario idRisorsa 
-```   
-
-Comando per rimuovere la risorsa con l'id inserito. La risposta può essere
-
-``` 
-[CLIENT] : remove -> true 
-```   
-
-se l'operazione è avvenuta con successo o
-
-``` 
-[CLIENT] : remove -> false 
-```   
-
-altrimenti, ovvero nel caso l'id non appartiene a nessuna risorsa nello store con l'indirizzo indicato.
-
-#### 2.2.3 Get
-
-```
- get indirizzoDestinatario idRisorsa 
- ```   
-
-Comando per ottenere una risorsa con n certo id. La risposta può essere
-
-``` 
-[CLIENT] : get -> {oggetto} 
-```   
-
-se l'oggetto con l'id indicato esiste nello store con tale indirizzo, altrimenti
-
-``` 
-[CLIENT] : get -> null 
-```
-
-#### 2.2.4 Get-all
-
-``` 
-get-all indirizzoDestinatario 
-```   
-
-Comando per ottenere tutti i dati dello store con tale indirizzo. La risposta sarà
-
-``` 
-[CLIENT] : get-all -> [dati] 
-```
-
-### 2.3 Operazioni Secondarie
-
-- **local-store**: mostra tutte le risorse presenti nello store locale
-- **help**: mostra la lista delle operazioni e la dicitura di un comando
-- **exit**: termina l'esecuzione del programma
+Per fare ciò basta immetter l'indirizzo ip e ottenere la risorsa premendo il pulsante *GET*. La risorsa apparirà nell'are di testo sottostante al pulsante.
 
 <a href="#indice">^ back ^</a>
 
 ## 3. Server
 
 Durante l'esecuzione possono arrivare messaggi che informano le operazioni avvenute a livello server. Queste
-avvisano    
-l'utente dell'avvenuta operazione sul proprio store. Tali messaggi sono
-
-``` 
-Request from indirizzoMittente 
-[SERVER]: operazione -> targetOperazione 
-```   
+avvisano l'utente dell'avvenuta operazione sul proprio server. Tali messaggi verranno visualizzati nell'area di testo sottostante.
 
 <a href="#indice">^ back ^</a>
 
