@@ -61,7 +61,7 @@ Per creare una risorsa **Rec** basta aggiungere i campi *Field* e *Rec* tramite 
 
 Per finire la procedura di invio basta immettere il nome del *Rec*, l'indirizzo ip del destinatario e premere il pulsante *POST*.
 
-### 2.2 GET
+### 2.3 GET
 
 Tramite la senzione apposita è possibile visualizzare una risorsa *Rec* dato l'indirizzo ip dell'host di chi la possiede.
 
